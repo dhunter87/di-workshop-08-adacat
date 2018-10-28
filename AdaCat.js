@@ -1,12 +1,16 @@
+// class created an object type of AdaCat
 class AdaCat {
+  // constructor method allows creation of an AdaCat object
+  // takes two perameters from the user in the console
   constructor(name, owner) {
     this.name = name
     this.owner = owner
-    this.hunger = 5
-    this.isSleeping = false
-    this.size = 30
+    
+    this.hunger = 5// initial hunger level = 5
+    this.isSleeping = false//initail state of cat = awake
+    this.size = 30//initial cat size = 30
   }
-
+  //stetHunger method
   setHunger(newHunger) {
     if (newHunger < 0) {
       newHunger = 0
