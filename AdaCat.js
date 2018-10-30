@@ -1,4 +1,4 @@
-// class created an object type of AdaCat
+//! class created an object type of AdaCat
 class AdaCat {
   // constructor method allows creation of an AdaCat object
   // takes two perameters from the user in the console
@@ -10,7 +10,7 @@ class AdaCat {
     this.isSleeping = false//initail state of cat = awake
     this.size = 30//initial cat size = 30
   }
-  //stetHunger method stopps the hunger variable from going above 10 or below 0
+  // setHunger method stops the hunger variable from going above 10 or below 0
   setHunger(newHunger) {
     // if new hunger is less than 0 - set newHunger to 0
     if (newHunger < 0) {
