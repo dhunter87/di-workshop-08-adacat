@@ -41,7 +41,7 @@ class AdaCat {
       // displays the cats name, current owners name, hunger level, weight level, health level and sleep line (depending on current status of the cat)
       this.name + ' is a cat. they belong to ' + this.owner + '.',
       'their hunger level is ' + this.hunger + '/10.',
-
+      'their tiredness level is ' + this.tiredness + '.',
       'they weigh ' + this.size + ' tonnes.',
       'their health is ' + this.getHealth() + '/30.',
       sleepLine
@@ -55,7 +55,7 @@ class AdaCat {
   feed() {
 
     var hunger = this.hunger - 1
-    var tiredness = this tiredness
+    this.tiredness++
 
     if (hunger < 3) {
       this.size = this.size + 1
@@ -72,6 +72,7 @@ class AdaCat {
   // wakeUp method changes the state of the isSleeping variable
   wakeUp() {
     this.isSleeping = false
+    this.tiredness = 0
   }
 
   // play method changes the state of the hunger and size variables.
