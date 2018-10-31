@@ -9,6 +9,7 @@ class AdaCat {
     this.hunger = 5// initial hunger level = 5
     this.isSleeping = false//initail state of cat = awake
     this.size = 30//initial cat size = 30
+    this.message // will display the cats status as a message to the console
   }
   // setHunger method stops the hunger variable from going above 10 or below 0
   setHunger(newHunger) {
@@ -23,6 +24,17 @@ class AdaCat {
 
     // set hunger to newHunger
     this.hunger = newHunger
+  }
+
+  setTiredness(newTiredness){
+    if(newTiredness < 0){
+      newTiredness = 0
+    }
+    if(newTiredness > 15){
+      newTiredness = 15
+    }
+    this.tiredness = newTiredness
+
   }
 
   // get iscription function describes the current satae of the cat object. 
@@ -44,71 +56,82 @@ class AdaCat {
       'their tiredness level is ' + this.tiredness + '.',
       'they weigh ' + this.size + ' tonnes.',
       'their health is ' + this.getHealth() + '/30.',
+      'cat status : ' + this.message,
       sleepLine
     ]
-
-
     return lines.join('\n')
   }
 
   //feed method increases and decreases the hunger variable 
   feed() {
 
-    var hunger = this.hunger - 1
-    this.tiredness++
+    var message = 'unable to feed cat while sleeping'
 
-    if (hunger < 3) {
-      this.size = this.size + 1
+    if(this.isSleeping == false){
+      var hunger = this.hunger - 1
+      var tiredness = this.tiredness + 1
+      message = 'cat feeding!'
+  
+      if (hunger < 3) {
+        this.size = this.size + 1
+      }
+  
+      this.setTiredness(tiredness)
+      this.setHunger(hunger)
+      this.message = message
+    }
+    else {
+      this.message = message 
     }
 
-    this.setHunger(hunger)
   }
 
   // nap method changes the state of the isSleeping variable
   nap() {
+    var message  = 'cat napping!'
     this.isSleeping = true
+    this.message = message
   }
 
   // wakeUp method changes the state of the isSleeping variable
   wakeUp() {
+    var message = 'cat is awake!'
     this.isSleeping = false
     this.tiredness = 0
+    this.message = message
   }
 
   // play method changes the state of the hunger and size variables.
   play() {
+    var message = 'cat playing!'
     var hunger = this.hunger + 3
     if (hunger > 7) {
       this.size = this.size - 1
     }
     this.setHunger(hunger)
+    this.message = message
   }
 
   // getHealth ethod changes the state of the health variable based on calculations 
   getHealth() {
-    //! the ideal weight for cats is 30
-    //! this futher they are from this, the less
-    //! healthy they are
 
+    var message = 'Please take cat to the vet - health low!'
     // variable stores the difference between optimum size and current size
     var sizeDifferenceFromIdeal = Math.abs(this.size - 30)
 
-    //! sizeScore starts at thirty, and gets
-    //! smaller as the cat's size gets further
-    //! from the ideal weight 
     // size Score is optimum size minus the difference from ideal size variable
     var sizeScore = 30 - sizeDifferenceFromIdeal
 
-    //! health score gets lower as the cat gets
-    //! more hungry
     //health score is equal to sizeScore minus hunger
     var healthScore = sizeScore - this.hunger
 
-    //! max returns the biggest value, so health
-    //! will never go below 0
     // if statement stops healthscore from going brlow 0
     if (healthScore < 0) {
       healthScore = 0
+    }
+    else if(healthScore > 0 && healthScore < 5){
+      this.message = message
+
     }
 
     // returns new health score
